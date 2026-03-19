@@ -1,0 +1,64 @@
+{
+  "short_name": "SecureChat",
+  "name": "Secure Chat - End-to-End Encrypted Messaging",
+  "description": "A secure real-time chat application with end-to-end encryption, group chats, and dark mode support",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3b82f6",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "categories": ["communication", "social", "security"],
+  "shortcuts": [
+    {
+      "name": "New Chat",
+      "short_name": "Chat",
+      "description": "Start a new conversation",
+      "url": "/chat?new=true",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contacts",
+      "short_name": "Contacts",
+      "description": "View your contacts",
+      "url": "/contacts",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/chat-view.jpg",
+      "type": "image/jpeg",
+      "sizes": "1280x720",
+      "label": "Chat Interface"
+    },
+    {
+      "src": "screenshots/dark-mode.jpg",
+      "type": "image/jpeg",
+      "sizes": "1280x720",
+      "label": "Dark Mode"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "lang": "en",
+  "dir": "ltr"
+}

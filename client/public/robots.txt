@@ -1,0 +1,11 @@
+# robots.txt for Secure Chat App
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /private/
+Disallow: /auth/
+
+# Sitemap
+Sitemap: https://securechat.example.com/sitemap.xml
+
+# Crawl-delay: 10

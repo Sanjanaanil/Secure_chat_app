@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "name": "chat-server",
   "version": "1.0.0",
@@ -25,30 +24,3 @@
     "nodemon": "^3.0.1"
   }
 }
-=======
-{
-  "name": "chat-server",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "server": "nodemon server/server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1",
-    "dotenv": "^16.6.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.5.0",
-    "multer": "^1.4.5-lts.1",
-    "socket.io": "^4.7.2"
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.1",
-    "nodemon": "^3.0.1"
-  }
-}
->>>>>>> de7565ca49d3668c0675e7bf4d5a8e6c7249fdb9

@@ -1,5 +1,4 @@
-
-require('dotenv').config({ path: __dirname + '/.env' });
+require('dotenv').config();
 
 const express = require('express');
 const http = require('http');
@@ -11,41 +10,44 @@ const authRoutes = require('./routes/authRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const setupSocket = require('./sockets/chatSocket');
 
-// Debug (optional but helpful)
-console.log("MONGODB_URI:", process.env.MONGODB_URI);
-
-// Connect to MongoDB
 connectDB();
 
 const app = express();
 const server = http.createServer(app);
 
-// Middleware
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://secure-chat-frontend-ushf.onrender.com',
+  process.env.CLIENT_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`Not allowed by CORS: ${origin}`));
+  },
   credentials: true
 }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 
-// Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
     message: 'Server is running',
-    timestamp: new Date().toISOString()
+    allowedOrigins
   });
 });
 
-// Socket.io setup
 const io = socketIO(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true
   }
@@ -53,7 +55,6 @@ const io = socketIO(server, {
 
 setupSocket(io);
 
-// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({
@@ -62,7 +63,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
@@ -71,5 +71,6 @@ const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`WebSocket server ready for connections`);
+  console.log('CLIENT_URL =', process.env.CLIENT_URL);
+  console.log('Allowed origins =', allowedOrigins);
 });
